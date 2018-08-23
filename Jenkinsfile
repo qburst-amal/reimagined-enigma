@@ -12,7 +12,8 @@ pipeline {
                     echo SG_ID
                     SUBNET_ID = sh (script:"aws ec2 describe-subnets --filter Name='tag:${TAG_KEY}',Values='${TAG_VAL}' | jq .Subnets[].SubnetId", returnStdout: true)
                     if (!SG_ID?.trim () || !SUBNET_ID?.trim()) {
-                        sh 'echo "Cannot find Security or SubnetId with ${TAG_VAL}"'    
+                        error("Cannot find Security or SubnetId with ${TAG_VAL}")
+
                     }
                 }
             }
