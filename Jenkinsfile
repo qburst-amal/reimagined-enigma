@@ -15,7 +15,7 @@ pipeline {
 
                     }
                     dir('./build-template/terraform/') {
-                        sh 'terraform plan'
+                        sh 'terrafom init && terraform plan'
                     }
                 }
             }
