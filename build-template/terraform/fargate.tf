@@ -13,18 +13,28 @@ resource "aws_ecs_task_definition" "pg_redis" {
   family                   = "pg_redis"
   network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
+  cpu                      = 1024
+  memory                   = 2048
 
   container_definitions = <<DEFINITION
 [
   {
-    "cpu": ${var.pg_cpu},
     "image": "postgres:latest",
-    "memory": ${var.pg_memory},
     "name": "postgres-${var.tag}",
     "networkMode": "awsvpc",
     "portMappings": [
       {
         "containerPort": 5432
+      }
+    ]
+  },
+  {
+    "image": "redis:latest",
+    "name": "redis-${var.tag}",
+    "networkMode": "awsvpc",
+    "portMappings": [
+      {
+        "containerPort": 6379
       }
     ]
   }
