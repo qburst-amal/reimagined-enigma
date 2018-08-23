@@ -15,7 +15,8 @@ pipeline {
 
                     }
                     dir('./build-template/terraform/') {
-                        sh 'terraform init && terraform plan'
+                        sh 'terraform init' 
+                        sh 'terraform apply -state ${JENKINS_HOME}/state-${TAG_KEY}.tfstate -input=false'
                     }
                 }
             }
