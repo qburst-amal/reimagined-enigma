@@ -17,7 +17,7 @@ pipeline {
                     dir('./build-template/terraform/') {
                         sh 'terraform init' 
                         AWS_DEFAULT_REGION = sh (script:"curl -s http://169.254.169.254/latest/dynamic/instance-identity/document | jq .region", returnStdout: true)
-                        sh 'export AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION} && terraform apply -state ${JENKINS_HOME}/state-${TAG_KEY}.tfstate -input=false'
+                        sh 'export AWS_DEFAULT_REGION="${AWS_DEFAULT_REGION}" && terraform apply -state ${JENKINS_HOME}/state-${TAG_KEY}.tfstate -input=false'
                     }
                 }
             }
