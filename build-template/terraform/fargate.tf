@@ -2,6 +2,10 @@
 #   cluster_name = "ecs-${var.tag}"
 # }
 
+providers = {
+  "aws" = "aws"
+}
+
 resource "aws_ecs_cluster" "ecs_fargate" {
   #   count = "${"${data.aws_ecs_cluster.ecs_fargate.cluster_name}" == "ecs-${var.tag}" ? 0 : 1}"
   name = "ecs-${var.tag}"
