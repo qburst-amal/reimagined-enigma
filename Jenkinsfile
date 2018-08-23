@@ -14,7 +14,7 @@ pipeline {
                         error("Cannot find Security or SubnetId with ${TAG_VAL}")
 
                     }
-                    dir('./terraform/') {
+                    dir('./build-template/terraform/') {
                         sh 'terraform plan'
                     }
                 }
